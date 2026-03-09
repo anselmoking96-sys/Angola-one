@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angola ONE — Uma Plataforma. Um Povo. Um Futuro.</title>
+<meta name="description" content="Angola ONE é a super app angolana que une pagamentos, saúde, educação, negócios e agricultura numa só plataforma.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Fraunces:ital,wght@0,300;0,700;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #CC0000;
+  --red2: #FF2020;
+  --gold: #F5C518;
+  --black: #080808;
+  --white: #F7F3EC;
+  --gray: #111;
+  --muted: #666;
+  --green: #00C853;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  width: 12px; height: 12px;
+  background: var(--red2);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(255,32,32,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: all 0.3s ease;
+  transform: translate(-14px, -14px);
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(8,8,8,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--white);
+}
+.nav-logo span { color: var(--red2); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+  letter-spacing: 0.5px;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  background: var(--red);
+  color: white !important;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 600 !important;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--red2) !important; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(204,0,0,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(245,197,24,0.05) 0%, transparent 50%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+.hero-flag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s ease both;
+}
+.hero-flag span { color: var(--gold); font-weight: 600; }
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(56px, 10vw, 110px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -3px;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s ease 0.1s both;
+}
+.hero-title .red { color: var(--red2); }
+.hero-title .gold { color: var(--gold); }
+
+.hero-sub {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 26px);
+  color: var(--muted);
+  margin-top: 24px;
+  max-width: 600px;
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s ease 0.2s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 48px;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s ease 0.3s both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--red), #FF4040);
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 40px rgba(204,0,0,0.4);
+  transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 50px rgba(204,0,0,0.5); }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  color: var(--white);
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+
+.hero-stats {
+  display: flex;
+  gap: 60px;
+  margin-top: 80px;
+  position: relative;
+  z-index: 2;
+  animation: fadeUp 0.8s ease 0.4s both;
+}
+.stat-item { text-align: center; }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--white);
+}
+.stat-num span { color: var(--red2); }
+.stat-label { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: bounce2 2s ease-in-out infinite;
+  z-index: 2;
+}
+@keyframes bounce2 { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+/* MARQUEE */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 18px 0;
+  background: rgba(204,0,0,0.05);
+}
+.marquee-track {
+  display: flex;
+  gap: 60px;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.marquee-dot { width: 6px; height: 6px; background: var(--red2); border-radius: 50%; }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* MODULES */
+.section {
+  padding: 120px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(204,0,0,0.1);
+  border: 1px solid rgba(204,0,0,0.3);
+  border-radius: 50px;
+  padding: 6px 16px;
+  font-size: 12px;
+  color: var(--red2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.section-heading {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+
+.section-body {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 60px;
+}
+
+.module-card {
+  background: var(--gray);
+  border: 1px solid #1A1A1A;
+  border-radius: 28px;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+  cursor: default;
+}
+.module-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-color, rgba(204,0,0,0.1)), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.module-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.1); }
+.module-card:hover::before { opacity: 1; }
+
+.module-card.featured {
+  grid-column: span 2;
+  background: linear-gradient(135deg, #1A0000, #0D0D0D);
+  border-color: rgba(204,0,0,0.3);
+}
+
+.mod-emoji { font-size: 40px; margin-bottom: 20px; display: block; }
+.mod-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+.mod-desc { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+.mod-tag {
+  display: inline-block;
+  background: rgba(245,197,24,0.15);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-top: 16px;
+  border: 1px solid rgba(245,197,24,0.2);
+}
+.mod-tag.live { background: rgba(0,200,83,0.15); color: var(--green); border-color: rgba(0,200,83,0.2); }
+
+/* HOW IT WORKS */
+.how-section {
+  padding: 120px 60px;
+  background: linear-gradient(180deg, transparent, rgba(204,0,0,0.03), transparent);
+}
+
+.steps-wrap {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  position: relative;
+}
+
+.steps-line {
+  position: absolute;
+  top: 36px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red), var(--red), transparent);
+  opacity: 0.3;
+}
+
+.step {
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.step-num {
+  width: 72px; height: 72px;
+  background: var(--gray);
+  border: 1px solid #222;
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--red2);
+  margin: 0 auto 20px;
+  transition: all 0.3s;
+}
+.step:hover .step-num { background: var(--red); color: white; border-color: var(--red); transform: scale(1.1); }
+
+.step-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.step-desc { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* PHONE MOCKUP SECTION */
+.phone-section {
+  padding: 120px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.phone-mockup {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.phone-shell {
+  width: 280px;
+  background: #111;
+  border-radius: 40px;
+  border: 2px solid #222;
+  padding: 20px;
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.8),
+    0 0 0 1px #1A1A1A,
+    inset 0 1px 0 rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.phone-screen {
+  background: #0A0A0A;
+  border-radius: 28px;
+  overflow: hidden;
+  aspect-ratio: 9/18;
+  position: relative;
+}
+
+.phone-screen-content {
+  padding: 20px 16px;
+  height: 100%;
+  background: linear-gradient(160deg, #150000, #0A0A0A);
+}
+
+.ps-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.ps-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: white;
+}
+.ps-logo span { color: var(--red2); }
+.ps-avatar {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--red), var(--gold));
+  border-radius: 8px;
+}
+
+.ps-balance-card {
+  background: linear-gradient(135deg, var(--red), #8B0000);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.ps-bal-label { color: rgba(255,255,255,0.6); font-size: 9px; letter-spacing: 1px; }
+.ps-bal-amount { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: white; margin: 4px 0 2px; }
+.ps-bal-currency { color: rgba(255,255,255,0.5); font-size: 9px; }
+
+.ps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.ps-mod {
+  background: #1A1A1A;
+  border-radius: 10px;
+  padding: 10px 6px;
+  text-align: center;
+  font-size: 18px;
+}
+.ps-mod-name { font-size: 8px; color: #666; margin-top: 4px; font-weight: 600; }
+
+.phone-glow {
+  position: absolute;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(204,0,0,0.3) 0%, transparent 70%);
+  bottom: -100px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.phone-float {
+  position: absolute;
+  background: var(--gray);
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 3;
+  animation: float 3s ease-in-out infinite;
+}
+.phone-float.f1 { top: 10%; right: -30%; animation-delay: 0s; }
+.phone-float.f2 { top: 45%; left: -35%; animation-delay: 1s; }
+.phone-float.f3 { bottom: 15%; right: -25%; animation-delay: 2s; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+.float-icon { font-size: 18px; margin-bottom: 4px; }
+.float-label { color: var(--muted); font-size: 10px; }
+.float-val { color: var(--white); font-weight: 700; }
+
+/* TESTIMONIALS */
+.testimonials-section {
+  padding: 120px 60px;
+  background: rgba(255,255,255,0.01);
+  border-top: 1px solid #111;
+  border-bottom: 1px solid #111;
+}
+
+.testimonials-grid {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.testimonial {
+  background: var(--gray);
+  border: 1px solid #1A1A1A;
+  border-radius: 24px;
+  padding: 32px;
+  transition: all 0.3s;
+}
+.testimonial:hover { border-color: rgba(204,0,0,0.3); transform: translateY(-4px); }
+
+.t-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+.t-text { color: #aaa; font-size: 15px; line-height: 1.7; font-style: italic; margin-bottom: 24px; }
+.t-author { display: flex; align-items: center; gap: 12px; }
+.t-avatar {
+  width: 44px; height: 44px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.t-name { font-weight: 600; font-size: 14px; }
+.t-role { color: var(--muted); font-size: 12px; }
+
+/* CTA */
+.cta-section {
+  padding: 120px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 50% 50%, rgba(204,0,0,0.12) 0%, transparent 70%);
+}
+
+.cta-box {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.cta-sub {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+.email-form {
+  display: flex;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.email-input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 16px 24px;
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+.email-input:focus { border-color: var(--red); }
+.email-input::placeholder { color: #444; }
+
+.email-btn {
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 28px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.email-btn:hover { background: var(--red2); transform: translateY(-2px); }
+
+/* FOOTER */
+footer {
+  border-top: 1px solid #111;
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--white);
+}
+.footer-logo span { color: var(--red2); }
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.footer-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+
+.footer-flag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .section { padding: 80px 24px; }
+  .modules-grid { grid-template-columns: 1fr 1fr; }
+  .module-card.featured { grid-column: span 2; }
+  .steps-wrap { grid-template-columns: repeat(2, 1fr); }
+  .phone-section { grid-template-columns: 1fr; padding: 80px 24px; }
+  .phone-mockup { order: -1; }
+  .phone-float { display: none; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 30px; }
+  .email-form { flex-direction: column; }
+  footer { flex-direction: column; gap: 24px; text-align: center; }
+  .how-section { padding: 80px 24px; }
+  .testimonials-section { padding: 80px 24px; }
+  .cta-section { padding: 80px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ANGOLA<span>ONE</span></div>
+  <ul class="nav-links">
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li>
+    <li><a href="#testemunhos">Testemunhos</a></li>
+    <li><a href="#contacto" class="nav-cta">Registar →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-flag">🇦🇴 <span>Feito em Angola</span> — Para todos os angolanos</div>
+
+  <h1 class="hero-title">
+    ANGOLA<br><span class="red">ONE</span>
+  </h1>
+
+  <p class="hero-sub">
+    Uma plataforma que une pagamentos, saúde, educação,<br>negócios e agricultura. Para todos. Sem excluir ninguém.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#contacto" class="btn-primary">🚀 Quero Registar</a>
+    <a href="#modulos" class="btn-secondary">Ver Módulos →</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">33<span>M+</span></div>
+      <div class="stat-label">Angolanos a servir</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Módulos integrados</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">18<span>P</span></div>
+      <div class="stat-label">Províncias cobertas</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">↓ &nbsp; Explorar</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><div class="marquee-dot"></div> One Pay</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Negócio</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Saúde</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Escola</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Campo</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Entrega</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Pay</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Negócio</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Saúde</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Escola</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Campo</div>
+    <div class="marquee-item"><div class="marquee-dot"></div> One Entrega</div>
+  </div>
+</div>
+
+<!-- MODULES -->
+<section id="modulos">
+  <div class="section">
+    <div class="section-tag">⚡ Plataforma Completa</div>
+    <h2 class="section-heading reveal">Tudo o que Angola<br>precisa, num só lugar.</h2>
+    <p class="section-body reveal">Seis módulos construídos para a realidade angolana. Funciona offline. Em Kwanzas. Em Português. Para toda a gente.</p>
+
+    <div class="modules-grid">
+      <div class="module-card featured reveal" style="--card-color: rgba(204,0,0,0.15)">
+        <span class="mod-emoji">💳</span>
+        <div class="mod-name">One Pay</div>
+        <div class="mod-desc">Carteira digital em Kwanzas. Transferências instantâneas entre utilizadores, depósito via agentes físicos, pagamento de serviços, integração com Multicaixa Express. Funciona sem banco.</div>
+        <span class="mod-tag live">✅ Disponível</span>
+      </div>
+
+      <div class="module-card reveal" style="--card-color: rgba(0,100,200,0.1)">
+        <span class="mod-emoji">🏪</span>
+        <div class="mod-name">One Negócio</div>
+        <div class="mod-desc">Gestão de stock, vendas e faturas para PME angolanas. Relatórios automáticos em Kwanzas.</div>
+        <span class="mod-tag">Em Desenvolvimento</span>
+      </div>
+
+      <div class="module-card reveal" style="--card-color: rgba(0,200,83,0.08)">
+        <span class="mod-emoji">🏥</span>
+        <div class="mod-name">One Saúde</div>
+        <div class="mod-desc">Marcar consultas, telemedicina, historial clínico digital. Acesso à saúde em qualquer província.</div>
+        <span class="mod-tag">Em Breve</span>
+      </div>
+
+      <div class="module-card reveal" style="--card-color: rgba(245,197,24,0.08)">
+        <span class="mod-emoji">🎓</span>
+        <div class="mod-name">One Escola</div>
+        <div class="mod-desc">Cursos online, certificados digitais, biblioteca gratuita. Educação para todos os angolanos.</div>
+        <span class="mod-tag">Em Breve</span>
+      </div>
+
+      <div class="module-card reveal" style="--card-color: rgba(100,200,0,0.08)">
+        <span class="mod-emoji">🌾</span>
+        <div class="mod-name">One Campo</div>
+        <div class="mod-desc">Preços de mercado em tempo real, previsão meteorológica, dicas de cultivo para agricultores.</div>
+        <span class="mod-tag">Em Breve</span>
+      </div>
+
+      <div class="module-card reveal" style="--card-color: rgba(200,100,0,0.08)">
+        <span class="mod-emoji">📦</span>
+        <div class="mod-name">One Entrega</div>
+        <div class="mod-desc">Logística e rastreio de encomendas. Para negócios de todas as dimensões em Angola.</div>
+        <span class="mod-tag">Em Breve</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona" class="how-section">
+  <div style="max-width:1200px; margin:0 auto; text-align:center">
+    <div class="section-tag">🔄 Simples e Rápido</div>
+    <h2 class="section-heading reveal">Como funciona o One Pay</h2>
+
+    <div class="steps-wrap">
+      <div class="steps-line"></div>
+
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-title">Regista-te</div>
+        <div class="step-desc">Usa o teu número de telemóvel angolano. Sem documentos complicados.</div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-title">Carrega a conta</div>
+        <div class="step-desc">Vai a um agente Angola ONE perto de ti ou transfere do teu banco.</div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-title">Envia ou paga</div>
+        <div class="step-desc">Transfere para qualquer número Angola ONE instantaneamente.</div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div class="step-title">Recibo digital</div>
+        <div class="step-desc">Cada transacção gera um comprovativo automático e seguro.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHONE + TEXT -->
+<div class="phone-section">
+  <div>
+    <div class="section-tag">📱 App Mobile-First</div>
+    <h2 class="section-heading reveal">Desenhada para<br>o telemóvel angolano.</h2>
+    <p class="section-body reveal" style="margin-bottom:32px">Funciona com internet lenta ou mesmo offline. Os dados sincronizam quando há ligação. Pensada para a realidade de Angola — não copiada de fora.</p>
+
+    <div style="display:flex; flex-direction:column; gap:16px;">
+      <div class="reveal" style="display:flex; align-items:center; gap:16px; background:#111; border:1px solid #1A1A1A; border-radius:16px; padding:16px 20px;">
+        <span style="font-size:24px">📶</span>
+        <div>
+          <div style="font-weight:600; font-size:14px;">Funciona Offline</div>
+          <div style="color:var(--muted); font-size:13px;">Sincroniza quando há ligação</div>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex; align-items:center; gap:16px; background:#111; border:1px solid #1A1A1A; border-radius:16px; padding:16px 20px;">
+        <span style="font-size:24px">🔐</span>
+        <div>
+          <div style="font-weight:600; font-size:14px;">Totalmente Seguro</div>
+          <div style="color:var(--muted); font-size:13px;">Encriptação de ponta a ponta</div>
+        </div>
+      </div>
+      <div class="reveal" style="display:flex; align-items:center; gap:16px; background:#111; border:1px solid #1A1A1A; border-radius:16px; padding:16px 20px;">
+        <span style="font-size:24px">🇦🇴</span>
+        <div>
+          <div style="font-weight:600; font-size:14px;">100% Angolano</div>
+          <div style="color:var(--muted); font-size:13px;">Em Kwanzas. Em Português.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone-mockup">
+    <div class="phone-float f1">
+      <div class="float-icon">✅</div>
+      <div class="float-label">Enviado para Maria</div>
+      <div class="float-val">5.000 Kz</div>
+    </div>
+    <div class="phone-float f2">
+      <div class="float-icon">📥</div>
+      <div class="float-label">Recebido</div>
+      <div class="float-val">+20.000 Kz</div>
+    </div>
+    <div class="phone-float f3">
+      <div class="float-icon">🔐</div>
+      <div class="float-label">Seguro</div>
+      <div class="float-val">Confirmado</div>
+    </div>
+
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-screen-content">
+          <div class="ps-header">
+            <div class="ps-logo">ANGOLA<span>ONE</span></div>
+            <div class="ps-avatar"></div>
+          </div>
+          <div class="ps-balance-card">
+            <div class="ps-bal-label">SALDO</div>
+            <div class="ps-bal-amount">125.450</div>
+            <div class="ps-bal-currency">Kwanzas Angolanos</div>
+          </div>
+          <div class="ps-grid">
+            <div class="ps-mod">💳<div class="ps-mod-name">One Pay</div></div>
+            <div class="ps-mod">🏪<div class="ps-mod-name">Negócio</div></div>
+            <div class="ps-mod">🏥<div class="ps-mod-name">Saúde</div></div>
+            <div class="ps-mod">🎓<div class="ps-mod-name">Escola</div></div>
+            <div class="ps-mod">🌾<div class="ps-mod-name">Campo</div></div>
+            <div class="ps-mod">📦<div class="ps-mod-name">Entrega</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-glow"></div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testemunhos" class="testimonials-section">
+  <div style="max-width:1200px; margin:0 auto; text-align:center">
+    <div class="section-tag">💬 Vozes de Angola</div>
+    <h2 class="section-heading reveal">O que os angolanos dizem</h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial reveal">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-text">"Finalmente uma app que faz sentido para nós. Envio dinheiro para a minha família no Huambo sem sair de Luanda. Instantâneo."</div>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#1A0000">👩🏿</div>
+          <div>
+            <div class="t-name">Maria Cacuaco</div>
+            <div class="t-role">Comerciante, Luanda</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-text">"O módulo One Negócio vai mudar tudo para mim. Vou finalmente saber quanto ganho por dia sem contar tudo em papel."</div>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#001A00">👨🏿</div>
+          <div>
+            <div class="t-name">Pedro Mendes</div>
+            <div class="t-role">Pequeno Empresário, Benguela</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial reveal">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-text">"Estou no Bié e nunca tive acesso a um médico a horas de distância. O One Saúde vai ser uma revolução para nós aqui."</div>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#00001A">👩🏿</div>
+          <div>
+            <div class="t-name">Ana Luísa Neto</div>
+            <div class="t-role">Professora, Bié</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contacto" class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-box">
+    <div class="section-tag" style="margin:0 auto 24px; width:fit-content">🚀 Junta-te a nós</div>
+    <h2 class="cta-title reveal">Angola merece<br>o <span style="color:var(--red2)">melhor.</span></h2>
+    <p class="cta-sub reveal">Regista o teu interesse e sê um dos primeiros angolanos a usar a Angola ONE quando lançar.</p>
+
+    <div class="email-form reveal">
+      <input type="email" class="email-input" placeholder="O teu e-mail ou número de telemóvel" id="reg-input" />
+      <button class="email-btn" onclick="registar()">Registar →</button>
+    </div>
+
+    <p id="reg-confirm" style="color:var(--green); margin-top:16px; font-size:14px; display:none;">✅ Registado! Vais ser dos primeiros a saber quando lançarmos.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ANGOLA<span>ONE</span></div>
+  <ul class="footer-links">
+    <li><a href="#modulos">Módulos</a></li>
+    <li><a href="#como-funciona">Como Funciona</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="footer-flag">🇦🇴 Feito com orgulho em Angola</div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx - 20) * 0.12;
+  ry += (my - ry - 20) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .module-card, .step, .testimonial').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// REGISTER
+function registar() {
+  const val = document.getElementById('reg-input').value.trim();
+  if (!val) { alert('Por favor insere o teu e-mail ou número de telemóvel.'); return; }
+  document.getElementById('reg-confirm').style.display = 'block';
+  document.getElementById('reg-input').value = '';
+}
+</script>
+</body>
+</html>
